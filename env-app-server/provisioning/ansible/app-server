@@ -1,0 +1,27 @@
+## Ansible site file for app-server
+[adminservers]
+app-server
+
+[common_selinux]
+app-server
+
+[common_repositories]
+app-server
+
+[common_nmon]
+app-server
+
+[common_hosts]
+app-server
+
+[common_ntp]
+app-server
+
+[common_packages]
+app-server
+
+[install_java8_openJDK]
+app-server
+
+[install_maven3]
+app-server

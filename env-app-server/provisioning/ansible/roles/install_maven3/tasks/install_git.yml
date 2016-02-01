@@ -1,0 +1,26 @@
+### Install Playbook for Install Git role
+# file: roles/install_maven3/tasks/install_git.yml
+
+---
+
+## Install openJDK8 Package
+- name: Install openJDK8 package
+  shell: "yum install -y git"
+  tags: Git
+
+  # Copy the Redis template
+- name: Copy the redis configuration file 
+  template: >
+    src=gitconfig.j2
+    dest=/etc/gitconfig
+  tags: Git
+  
+  ## Ensure git download project folder exists
+- name: Ensure git download project folder exists
+  file: >
+    path={{ git_project_dir }}
+    state=directory
+    owner=root
+    group=root
+    mode=777
+  tags: Git

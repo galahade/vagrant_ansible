@@ -1,0 +1,6 @@
+### Main Playbook for install_java role
+# file: roles/install_java8_openJDK/tasks/main.yml
+
+---
+
+- include: java_install.yml

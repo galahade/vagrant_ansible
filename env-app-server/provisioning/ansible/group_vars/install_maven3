@@ -1,0 +1,13 @@
+# file: /group_vars/install_maven3
+# this is the install_maven3 group defaults
+
+---
+
+## git user email account. Default use github account
+git_user_account: galahade@sina.com
+
+## git user name. Default use github account name
+git_user_name: Young Yang
+
+## git default editor
+git_editor: emacs

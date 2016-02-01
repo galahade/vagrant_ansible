@@ -1,0 +1,70 @@
+### Install Playbook for Install maven3.3.9 Self Contained role
+# file: roles/install_maven3/tasks/install_maven.yml
+
+---
+
+## Ensures {{install_toplevel_dir}} exists
+- name: Ensures {{install_toplevel_dir}}
+  file: >
+    path={{install_toplevel_dir}}
+    owner=root
+    group=root
+    mode=755
+    state=directory
+  tags: Maven
+
+# Create the root folder to unpack into if required
+- name: Create Maven home folder
+  file: >
+    path={{ maven_home_folder }}
+    state=directory
+  tags: Maven
+
+# Set ownership on Maven folder
+- name: Create Maven home folder
+  file: >
+    path={{ maven_home_folder }}
+    owner=root
+    group=root
+    mode=0755
+    state=directory
+  tags: Maven
+
+# Unpack the Maven distribution
+- name: Unpack the Maven distribution
+  unarchive: >
+    src={{maven_archive_prefix}}{{ maven_software_version }}-bin.tar.gz
+    dest={{ install_toplevel_dir }}
+    owner=root
+    group=root
+  tags: Maven
+  
+## Setup MAVEN_HOME 
+## CLEAN MAVEN_HOME first
+- name: clear old MAVEN_HOME env
+  lineinfile: dest=/etc/profile regexp='MAVEN_HOME' state=absent
+  tags: Maven
+
+## Setup new MAVEN_HOME value 	
+- name: set MAVEN_HOME env
+  lineinfile:
+    dest=/etc/profile
+    insertafter="{{item.position}}"
+    line="{{item.value}}"
+    state=present
+  with_items:
+    - {position: EOF, value: "\r\n"}
+    - {position: EOF, value: 'export MAVEN_HOME={{ maven_home_folder }}'}
+    - {position: EOF, value: 'export PATH=$MAVEN_HOME/bin:$PATH'}
+  tags: Maven
+
+# Change installation owner as a bug in the previous step didn't change the owner
+#- name: Change ownership on expanded Maven distribution
+#  file: >
+#    path={{ tomcat_home_folder }}/{{tomcat_archive_prefix}}{{ tomcat_software_version }}
+#    owner={{ tomcat_username }}
+#    group={{ tomcat_groupname }}
+#    state=directory
+#    mode=o-rwx
+#    recurse=yes
+#  tags: Maven

@@ -1,0 +1,7 @@
+### Main Playbook for install_tomcat7_sc role
+# file: roles/install_maven3.3.9/tasks/main.yml
+
+---
+
+- include: install_maven.yml
+- include: install_git.yml

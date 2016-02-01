@@ -1,0 +1,5 @@
+## Playbook for "install_maven3" Role
+# file: install_maven3.yml
+- hosts: install_maven3
+  roles:
+    - install_maven3
