@@ -1,0 +1,7 @@
+# file: roles/install_tomcat7_sc/defaults/main.yml
+# This contains all the default settings for the Tomcat role.  Variables here will be
+# overridden by variables in inventory or parameters
+
+---
+
+git_project_dir: /project

@@ -1,0 +1,24 @@
+### Install Playbook for Install git Self Contained role
+# file: roles/install_git/tasks/install_git.yml
+---
+## Install git Package
+- name: Install Git package
+  apt: name=git-all update_cache=yes
+  tags: Git
+
+  # Copy the Git template
+- name: Copy the redis configuration file 
+  template: >
+    src=gitconfig.j2
+    dest=/etc/gitconfig
+  tags: Git
+  
+  ## Ensure git download project folder exists
+- name: Ensure git download project folder exists
+  file: >
+    path={{ git_project_dir }}
+    state=directory
+    owner=root
+    group=root
+    mode=777
+  tags: Git

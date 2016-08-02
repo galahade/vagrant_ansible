@@ -1,0 +1,5 @@
+## Ansible site file
+[install_docker]
+docker-host
+[install_git]
+docker-host

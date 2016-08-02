@@ -1,0 +1,15 @@
+## HOST_VARS for development Vagrant Image
+---
+
+#The name of the host to connect to, if different from the alias you wish to give to it.
+ansible_ssh_host: 192.168.56.200
+
+# The default ssh user name to use.
+ansible_ssh_user: vagrant
+
+#Private key file used by ssh.  Useful if using multiple keys and you don't want to use SSH agent.
+ansible_ssh_private_key_file: ~/.vagrant.d/insecure_private_key
+
+project_key: vagrant_ansible_base
+
+server_admin_email: yyang@salmon.com

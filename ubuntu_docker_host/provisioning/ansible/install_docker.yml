@@ -1,0 +1,5 @@
+## Playbook for "install_docker" Role
+# file: install_docker.yml
+- hosts: install_docker
+  roles:
+    - install_docker
