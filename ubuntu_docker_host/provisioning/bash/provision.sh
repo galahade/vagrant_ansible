@@ -19,7 +19,7 @@ echo Update apt repository to add newest ansible
 
 
 # Install Ansible
-#echo Install Ansible
+echo Install Ansible
 #sudo apt-get install -y ansible python-apt python-pycurl python-pip python-virtualenv
 
 
@@ -29,7 +29,7 @@ printf '[vagrant]\nlocalhost\n' | sudo tee /etc/ansible/hosts > /dev/null
 
 
 ## Workaround for Vagrant on Windows machines
-# /vagrant is mounted as 777 which causes Ansible problems
+# /vagrant is mounted as 777 whicVagrantfileh causes Ansible problems
 # therefore we move the Ansible content sideways and chmod it properly
 echo -e "Copying Ansible Resources to staging area."
 sudo mkdir -p /data/ansible

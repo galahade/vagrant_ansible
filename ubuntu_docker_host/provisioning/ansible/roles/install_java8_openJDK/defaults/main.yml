@@ -1,0 +1,18 @@
+# file: roles/install_java7_sc/defaults/main.yml
+# This contains all the default settings for the Java role.  Variables here will be
+# overridden by variables in inventory or parameters
+
+---
+
+### Tomcat Software Dependencies
+## JDK software RPM name
+#jdk_rpm_file: jdk-7u80-linux-x64.rpm
+
+## JSVC software RPM name
+jsvc_rpm_file: jsvc-1.0.10-3.2.x86_64.rpm
+
+## Java7 JDK Folder
+#java7_jdk_home: /usr/java/jdk1.7.0_80
+
+## Open JDK8 JAVA_HOME Folder
+openjdk8_home : /usr/lib/jvm/java-7-openjdk-amd64

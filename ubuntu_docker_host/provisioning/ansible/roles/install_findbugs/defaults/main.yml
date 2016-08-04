@@ -1,0 +1,9 @@
+# file: roles/install_tomcat7_sc/defaults/main.yml
+# This contains all the default settings for the Tomcat role.  Variables here will be
+# overridden by variables in inventory or parameters
+
+---
+
+findbugs_dir: findbugs
+
+maven_archive_name: findbugs-noUpdateChecks-3.0.1.tar.gz

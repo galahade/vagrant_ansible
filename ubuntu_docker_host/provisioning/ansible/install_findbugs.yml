@@ -1,0 +1,5 @@
+## Playbook for "install_git" Role
+# file: install_git.yml
+- hosts: install_findbugs
+  roles:
+    - install_findbugs

@@ -7,19 +7,24 @@
 #
 #
 
-# Install EPEL repository (assuming RHEL/Centos 6)
-rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+# Install EPEL repository (assuming RHEL/Centos 7)
+echo -e "Install EPEL repository."
+rpm -iUvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
 
 # Update base VM packages
+echo -e "Update base VM packages."
 sudo yum --exclude=kernel* --exclude=centos-release* --exclude=redhat-release* update -y
 
 # Install Support packages
 #sudo yum install -y dos2unix
 
 # Install Ansible
+echo -e "Install Ansible."
 sudo yum install -y ansible
 
 # Create local Ansible HOSTS file
+echo -e "Create local Ansible HOSTS file."
 sudo mkdir -p /etc/ansible
 printf '[vagrant]\nlocalhost\n' | sudo tee /etc/ansible/hosts > /dev/null
 

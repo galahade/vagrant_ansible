@@ -1,0 +1,4 @@
+### Handlers for java playbook
+# file: roles/install_java7_sc/handlers/main.yml
+
+---

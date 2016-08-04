@@ -1,0 +1,5 @@
+## Playbook for "install_java8_openJDK" Role
+# file: install_java8_openJDK.yml
+- hosts: install_java8_openJDK
+  roles:
+    - install_java8_openJDK

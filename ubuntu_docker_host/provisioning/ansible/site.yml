@@ -1,2 +1,4 @@
-- include: install_docker.yml
-- include: install_git.yml
+#- include: install_docker.yml
+#- include: install_git.yml
+#- include: install_java8_openJDK.yml
+- include: install_findbugs.yml

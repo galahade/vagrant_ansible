@@ -3,3 +3,7 @@
 docker-host
 [install_git]
 docker-host
+[install_java8_openJDK]
+docker-host
+[install_findbugs]
+docker-host

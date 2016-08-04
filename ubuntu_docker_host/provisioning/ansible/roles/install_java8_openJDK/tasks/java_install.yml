@@ -1,0 +1,101 @@
+### Install Playbook for Install Java role
+# file: roles/install_java7_sc/tasks/java_install.yml
+
+---
+
+## Ensure target folder for RPM file exists
+- name: Ensure Software Temporary folder exists
+  file: >
+    path={{ item }}
+    state=directory
+    owner=root
+    group=root
+    mode=775
+  with_items:
+    - "{{ software_dest_tmp_dir }}"
+    - "{{ software_dest_tmp_dir }}/deploy"
+  tags: Java
+
+## Commented out as the use of Oracle JDKs presents an issue with file sizes
+## Switching to OpenJDK for the moment instead - to be revisted once GitHub is 
+## out of the picture
+
+## Install Unzip Package
+#- name: Install openJDK7 package
+#  yum: >
+#    name=java-1.7.0-openjdk
+#    state=latest
+#  tags: Java
+
+## Install openJDK8 Package
+- name: Install openJDK8 package
+  apt: name=openjdk-7-jdk update_cache=yes
+  tags: Java
+  
+## Setup JAVA_HOME 
+## CLEAN JAVA_HOME first
+- name: clear old JAVA_HOME env
+  lineinfile: dest=/etc/profile regexp='JAVA_HOME' state=absent
+  tags: Java
+
+## Setup new JAVA_HOME value 	
+- name: set JAVA_HOME env
+  lineinfile:
+    dest=/etc/profile
+    insertafter="{{item.position}}"
+    line="{{item.value}}"
+    state=present
+  with_items:
+    - {position: EOF, value: "\r\n"}
+    - {position: EOF, value: 'export JAVA_HOME={{openjdk8_home}}'}
+    - {position: EOF, value: 'export PATH=$JAVA_HOME/bin:$PATH'}
+    - {position: EOF, value: 'export CLASSPATH=.:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/rt.jar'}
+  tags: Java
+  
+## Copies the Java JDK software from the Ansible server to the remote server to be installed
+#- name: Copy the Java archive to the server to install
+#  copy: >
+#    src={{ jdk_rpm_file }}
+#    dest={{ software_dest_tmp_dir }}
+#  tags: Java
+#
+## Install the RPM file
+#- name: Install Java if not present
+#  yum: >
+#    name={{ software_dest_tmp_dir }}/{{ jdk_rpm_file }}
+#    state=present
+#  tags: Java
+#
+## Install the US Export restriction JCE Polices
+#- name: Deploy JCE US Export Restriction jars
+#  copy: >
+#    src={{ item }}
+#    dest={{java7_jdk_home}}/jre/lib/security/{{ item }}
+#  with_items:
+#    - local_policy.jar
+#    - US_export_policy.jar
+#  tags: Java
+#
+## Install the new copy of Java into alternatives
+#- name: Install the correct Java in alternatives
+#  shell: 'alternatives --install /usr/bin/java java {{java7_jdk_home}}/bin/java 2'
+#  tags: Java
+#
+## Set the new java to the default in alternatives
+#- name: Configure the correct Java in alternatives
+#  shell: 'alternatives --set java {{java7_jdk_home}}/bin/java'
+#  tags: Java
+
+# Transfer Apache-Commons RPM JSVC是apache出的所谓common daemon的一个工具套件，他利用一个daemon程序，从而使tomcat这样的程序能在开机的时候自动启动，而且能使tomcat被 chkconfig这样的工具所管理
+#- name: Copy the JSVC archive to the server to install
+#  copy: > 
+#    src={{ jsvc_rpm_file }} 
+#    dest={{ software_dest_tmp_dir }}/deploy
+#  tags: Java
+
+# Install Apache-Commons RPM
+#- name: Install JSVC
+#  yum: > 
+#    name={{ software_dest_tmp_dir }}/deploy/{{ jsvc_rpm_file }}
+#    state=present
+#  tags: Java

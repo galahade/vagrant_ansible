@@ -1,0 +1,30 @@
+### Install Playbook for Install git Self Contained role
+# file: roles/install_git/tasks/install_git.yml
+---
+## Ensures {{install_toplevel_dir}} exists
+- name: Ensures {{install_toplevel_dir}} exists
+  file: >
+    path={{install_toplevel_dir}}
+    owner=root
+    group=root
+    mode=777
+    state=directory
+  tags: Findbugs
+  
+- name: Unpack the Findbugs distribution
+  unarchive: >
+    src={{maven_archive_name}}
+    dest={{ install_toplevel_dir }}
+    owner=root
+    group=root
+  tags: Findbugs
+
+- name: Link Findbugs to PATH 
+  file: >
+    src={{ install_toplevel_dir }}/findbugs-3.0.1/bin/findbugs
+    dest=/usr/bin/findbugs
+    owner=root 
+    group=root 
+    state=link
+    mode=555
+  tags: Findbugs

@@ -4,7 +4,7 @@
 ---
 
 ## Top Level directory that software should be installed in on the server
-install_toplevel_dir: /data
+install_toplevel_dir: /usr/local/share
 
 ## Base folder for deployment assets on the Ansible Server
 software_dest_tmp_dir: /data

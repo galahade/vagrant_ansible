@@ -2,5 +2,5 @@
 # file: roles/install_docker/tasks/main.yml
 
 ---
-
-- include: install_git.yml
+#
+#- include: install_git.yml

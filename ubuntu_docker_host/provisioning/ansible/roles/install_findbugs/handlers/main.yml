@@ -1,0 +1,3 @@
+### Handlers for tomcat playbook
+# file: roles/install_maven3.3.9/handlers/main.yml
+---
